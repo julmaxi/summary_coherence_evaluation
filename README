@@ -1,0 +1,41 @@
+
+
+## Preparation
+
+This software expects the summeval dataset in a csv format. You can use ``scm.utilities.load_summeval``
+to import the raw data from https://drive.google.com/file/d/1d2Iaz3jNraURP1i7CfTqPIj8REZMJ3tS/view?usp=sharing.
+The script also expects a path to two directories that contain articles and reference for all summaries in the dataset, named just using their original hash (i.e. f37fd6e9b6cc18a7132568e307ef3b130931e809).
+
+To generate the shuffle data, run ``scmeval.shuffling``
+
+## Evaluation
+
+All scores can be found in ``predicted_scores``.
+To reproduce the evaluation, run ``python scmeval.evaluation.evaluate data/summeval_full_scores.csv <score_file>``.
+For pairwise evaluation, run ``python scmeval.evaluation.evaluate_pairwise <score_file>``
+The notebook plots.ipynb includes intstructions to recreate the plots in the paper.
+
+
+## Preparing Brown Coherence Data
+
+To prepare the entity grids which are used by the entity based models, run
+
+``
+python -m scmeval.entity_grid.create_grids <infile>
+``
+
+This will generate as CSV file for all texts in ``<infile>`` in ``outputs/entity_gris``
+
+
+## CCL
+
+The code for the coherence classifier can be found in ``scmeval.ccl``.
+``scmeval.ccl.train`` trains a new model, ``scmeval.ccl.test`` evaluates a checkpoint.
+
+## Entity Graph
+
+Our reimplementation of the entity graph can be found in ``scmeval.entity_grid.entity_graph``
+
+## Artifacts
+
+We include all models we trained ourselves in ``artifacts/``. For pretrained models see the original repositories linked in the appendix.
